@@ -71,6 +71,8 @@ function seach_data_show(func, delay) {
 // https://newsapi.org/v2/everything?q=Apple&from=2021-10-18&sortBy=popularity&apiKey=API_KEY
 var arr = [];
 function render_data(res) {
-  var data = localStorage.setItem("search_data", JSON.stringify(arr));
-  console.log(data);
+  //   arr.push(res.articles);
+
+  localStorage.setItem("news_data", JSON.stringify(res.articles));
+  window.location.href = "search.html";
 }
