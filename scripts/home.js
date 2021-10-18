@@ -18,12 +18,12 @@ function get_popular() {
 
 let div1 = document.getElementById("app");
 function resm(resu) {
-  resu.forEach(({ author, urlToImage, title }) => {
+  resu.forEach(({ author, urlToImage, title, description }) => {
     var div = document.createElement("div");
     div.addEventListener("click", () => {
       localStorage.setItem(
         "mynews",
-        JSON.stringify({ author, urlToImage, title })
+        JSON.stringify({ author, urlToImage, title, description })
       );
       window.location.href = "news.html";
     });
