@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #app {
+        background-color: antiquewhite;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script>
+  function get_popular() {
+    var res = fetch(
+      "https://newsapi.org/v2/top-headlines?q=world&sortBy=popularity&apiKey=eac5083f1e5e49418009d0269b6763b4"
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        // console.log(res);
+        resm(res.articles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  let div1 = document.getElementById("app");
+  function resm(resu) {
+    resu.forEach(({ author, urlToImage }) => {
+      var div = document.createElement("div");
+      var image = document.createElement("img");
+      image.src = urlToImage;
+      image.style.width = "400px";
+      var p = document.createElement("p");
+      p.innerText = author;
+      div.append(image, p);
+      div1.append(div);
+    });
+  }
+  get_popular();
+</script>
