@@ -1,3 +1,4 @@
+var timerId;
 function get_popular() {
   fetch(
     "https://newsapi.org/v2/top-headlines?q=world&sortBy=popularity&apiKey=eac5083f1e5e49418009d0269b6763b4"
@@ -39,4 +40,37 @@ function resm(resu) {
     div1.append(div);
   });
 }
+
+function show_search() {
+  var inp1 = document.querySelector("input").value;
+  fetch(
+    `https://newsapi.org/v2/everything?q=${inp1}&sortBy=publishedAt&apiKey=eac5083f1e5e49418009d0269b6763b4`
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      //   console.log(res);
+      render_data(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 get_popular();
+//debounce
+function seach_data_show(func, delay) {
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+  timerId = setTimeout(() => {
+    func();
+  }, delay);
+}
+// https://newsapi.org/v2/everything?q=Apple&from=2021-10-18&sortBy=popularity&apiKey=API_KEY
+var arr = [];
+function render_data(res) {
+  var data = localStorage.setItem("search_data", JSON.stringify(arr));
+  console.log(data);
+}
